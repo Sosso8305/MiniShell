@@ -12,6 +12,7 @@
 #define DEBUG 0
 
 char * fdest = NULL;
+int append = 0;
 
 int read_command(char * command, char ** arg){
     int nb_arg = 1;
@@ -29,9 +30,12 @@ int read_command(char * command, char ** arg){
         scanf("%s",chaine);
         
 
-        if (!strcmp(chaine,">")){
+        if (!strcmp(chaine,">") || !strcmp(chaine,">>")){
             fdest = malloc((BUFSIZE -1) * sizeof(char));
             scanf("%s",fdest);
+            if(!strcmp(chaine,">>")){
+                append = 1;
+            }
 
             break;
 
@@ -59,7 +63,14 @@ int run_command(char * command, char ** arg){
         //fils
         
         if(fdest){
-            if((outfd=open(fdest,O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1) perror ("open fdest");
+
+            if(append) 
+                outfd=open(fdest,O_WRONLY | O_CREAT | O_APPEND, 0666);
+            else 
+                outfd=open(fdest,O_WRONLY | O_CREAT | O_TRUNC, 0666);
+
+            if(outfd == -1) perror ("open fdest");
+
             dup2(outfd,STDOUT_FILENO);
         }
 
