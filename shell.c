@@ -91,11 +91,15 @@ int main(int argc, char const *argv[])
 
     while(1){
         fdest = NULL;
-        
+
+        printf("\033[0;35m");
         printf("sosso@shell $ ");
+        printf("\033[0m");
         
         if ((nb_arg = read_command(command,arg)) == -1){
+            printf("\033[0;33m");
             puts("End of my shell");
+            printf("\033[0m");
             return EXIT_SUCCESS;         //la commande exit s'est bien executé
         }
         arg[0] = command;
