@@ -14,7 +14,7 @@
 char * fdest = NULL;
 
 int read_command(char * command, char ** arg){
-    int nb_arg;
+    int nb_arg = 1;
     char * chaine;
 
     //read command
@@ -48,12 +48,6 @@ int read_command(char * command, char ** arg){
 int run_command(char * command, char ** arg){
     pid_t pid;
     int outfd;
-
-    if(DEBUG){
-        for(int i= 0;i<sizeof(arg);i++){
-            printf("arg n° %i %s \n",i,arg[i]);
-        }
-    }
 
 
     if((pid = fork()) == -1 ) {
@@ -104,6 +98,8 @@ int main(int argc, char const *argv[])
             puts("End of my shell");
             return EXIT_SUCCESS;         //la commande exit s'est bien executé
         }
+        arg[0] = command;
+
 
         if (DEBUG){
             printf("commande a exécuter: %s, %d arguments [",command,nb_arg);
