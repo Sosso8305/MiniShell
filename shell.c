@@ -9,12 +9,13 @@
 
 
 #define BUFSIZE 512
+#define DEBUG 0
 
 char * fdest = NULL;
 
 int read_command(char * command, char ** arg){
-    char chaine[BUFSIZE];
     int nb_arg;
+    char * chaine;
 
     //read command
     scanf("%s",command);
@@ -24,10 +25,15 @@ int read_command(char * command, char ** arg){
 
     //read arg
     while(getchar() != '\n'){
+        chaine= malloc((BUFSIZE -1) * sizeof(char));
         scanf("%s",chaine);
+        
 
         if (!strcmp(chaine,">")){
+            fdest = malloc((BUFSIZE -1) * sizeof(char));
             scanf("%s",fdest);
+
+            break;
 
         }
         else arg[nb_arg++]=chaine;
@@ -43,19 +49,27 @@ int run_command(char * command, char ** arg){
     pid_t pid;
     int outfd;
 
-    if((pid = fork()) == -1 ) perror("fork");
-        
+    if(DEBUG){
+        for(int i= 0;i<sizeof(arg);i++){
+            printf("arg n° %i %s \n",i,arg[i]);
+        }
+    }
 
 
+    if((pid = fork()) == -1 ) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+                
     if (pid == 0){
         //fils
-
+        
         if(fdest){
             if((outfd=open(fdest,O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1) perror ("open fdest");
             dup2(outfd,STDOUT_FILENO);
         }
 
-        if(execv(command,arg) == -1) perror("execv");
+        if(execvp(command,arg) == -1) perror("execvp");
 
         if(fdest) close(outfd);
 
@@ -83,13 +97,27 @@ int main(int argc, char const *argv[])
 
     while(1){
         fdest = NULL;
+        
         printf("sosso@shell $ ");
         
-        if ((nb_arg = read_command(command,arg)) == -1) return EXIT_SUCCESS;         //la commande exit c'est bien executé
-        arg[0]=command;
+        if ((nb_arg = read_command(command,arg)) == -1){
+            puts("End of my shell");
+            return EXIT_SUCCESS;         //la commande exit s'est bien executé
+        }
 
-        if (run_command(command,arg) == -1) perror("run commande");
+        if (DEBUG){
+            printf("commande a exécuter: %s, %d arguments [",command,nb_arg);
+            for(int i= 0;i<nb_arg;i++){
+                printf("%i:%s,",i,arg[i]);
+            }
+            printf("], fdest : %s\n",fdest);
+        }
+        
 
+        if (run_command(command,arg) == -1) perror("run commande error");
+
+        //arg[1] 
+        
     }
 
 
