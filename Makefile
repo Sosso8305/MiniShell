@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -Wall
-CIBLES	= shell LS
+
+CIBLES	= shell ls
 
 all: $(CIBLES)
 

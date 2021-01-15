@@ -116,7 +116,7 @@ int main(int argc, char const *argv[])
 
         if (run_command(command,arg) == -1) perror("run commande error");
 
-        //arg[1] 
+        
         
     }
 
