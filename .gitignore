@@ -2,7 +2,7 @@
 *.d
 
 #file txt
-.txt
+*.txt
 
 # Object files
 *.o
