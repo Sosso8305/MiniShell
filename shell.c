@@ -15,9 +15,10 @@ char * fdest = NULL;
 int append = 0;
 
 void init_msg(){
-    puts("\n***************************************");
+    puts("\n***********************************************");
     puts( "\n   MINI SHELL \n  \t\t by Zouaoui Sofiane\n"); 
-    puts("***************************************\n");
+    puts("view on: https://github.com/Sosso8305/MiniShell \n");
+    puts("***********************************************\n");
 
 }
 
