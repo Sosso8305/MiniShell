@@ -14,12 +14,29 @@
 char * fdest = NULL;
 int append = 0;
 
+void print_warning(char * text){
+    printf("\x1B[31m");
+    printf("%s",text);
+    printf("\x1B[0m");
+}
+
+int fct_cd(char ** arg){
+
+    if(arg[1] == NULL)
+        print_warning("command: cd <directory floder> \n");
+    else
+        if(chdir(arg[1])==-1) perror("chdir");
+
+    return 0;
+}
+
 int read_command(char * command, char ** arg){
     int nb_arg = 1;
     char * chaine;
 
     //read command
     scanf("%s",command);
+
 
     //exit
     if(strcmp(command,"exit") == 0 ) return -1;
@@ -74,7 +91,9 @@ int run_command(char * command, char ** arg){
             dup2(outfd,STDOUT_FILENO);
         }
 
-        if(execvp(command,arg) == -1) perror("execvp");
+        if(!strcmp(command,"cd")) fct_cd(arg);
+
+        else if(execvp(command,arg) == -1) perror("execvp");
 
         if(fdest) close(outfd);
 
@@ -111,7 +130,7 @@ int main(int argc, char const *argv[])
             printf("\033[0;33m");
             puts("End of my shell");
             printf("\033[0m");
-            return EXIT_SUCCESS;         //la commande exit s'est bien executé
+            break;        //la commande exit s'est bien executé
         }
         arg[0] = command;
 

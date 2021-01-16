@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall
 
-CIBLES	= shell ls
+CIBLES	= shell ls touch
 
 all: $(CIBLES)
 
