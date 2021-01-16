@@ -17,7 +17,7 @@ void print_warning(char * text){
 int main (int argc, char * argv[]){
  
     if(argc != 3){
-        print_warning("command : mv <src> <dest> \n");
+        print_warning("command : cp <src> <dest> \n");
         return -1;
     }   
 
@@ -35,7 +35,5 @@ int main (int argc, char * argv[]){
 
     close(fddest);
     close(fdsrc);
-
-    if (remove(argv[1]) == -1) perror("remove src");
 
 }
