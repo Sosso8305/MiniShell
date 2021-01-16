@@ -7,7 +7,7 @@ Faire un make run
 
 Redirection  sortie de fichier  >  et >>
 couleur du shell
-utilisation de commande externe : ls touch mkdir mv cp rm
+utilisation de commande externe : ls touch mkdir mv cp rm rmdir 
 utilisation du commande interne : cd pwd
 
 
