@@ -14,6 +14,13 @@
 char * fdest = NULL;
 int append = 0;
 
+void init_msg(){
+    puts("\n***************************************");
+    puts( "\n   MINI SHELL \n  \t\t by Zouaoui Sofiane\n"); 
+    puts("***************************************\n");
+
+}
+
 void print_warning(char * text){
     printf("\x1B[31m");
     printf("%s",text);
@@ -142,6 +149,8 @@ int main(int argc, char const *argv[])
     char command[BUFSIZE];
     char * arg[BUFSIZE];
     int nb_arg;
+
+    init_msg();
 
     while(1){
         fdest = NULL;
