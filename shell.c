@@ -20,7 +20,22 @@ void print_warning(char * text){
     printf("\x1B[0m");
 }
 
-int fct_cd(char ** arg){
+
+void pwd(int saut){
+    char * tmp;
+    tmp = malloc(BUFSIZE*sizeof(char));
+    if (getcwd(tmp,BUFSIZE) == NULL)  perror("getcwd");
+    
+    if(saut)
+        printf("%s \n",tmp);
+    else{
+        printf("\x1B[36m");
+        printf("%s",tmp);
+        printf("\x1B[0m");
+    }
+}
+
+int cd(char ** arg){
 
     if(arg[1] == NULL)
         print_warning("command: cd <directory floder> \n");
@@ -91,7 +106,9 @@ int run_command(char * command, char ** arg){
             dup2(outfd,STDOUT_FILENO);
         }
 
-        if(!strcmp(command,"cd")) fct_cd(arg);
+        if(!strcmp(command,"cd")) cd(arg);
+
+        else if (!strcmp(command,"pwd")) pwd(1);
 
         else if(execvp(command,arg) == -1) perror("execvp");
 
@@ -110,7 +127,14 @@ int run_command(char * command, char ** arg){
 
 }
 
+void shell(){
+    printf("\033[0;35m");
+    printf("sosso@shell:");
+    printf("\033[0m");
+    pwd(0);
+    printf("$ ");
 
+}
 
 int main(int argc, char const *argv[])
 {
@@ -122,9 +146,7 @@ int main(int argc, char const *argv[])
     while(1){
         fdest = NULL;
 
-        printf("\033[0;35m");
-        printf("sosso@shell $ ");
-        printf("\033[0m");
+        shell();
         
         if ((nb_arg = read_command(command,arg)) == -1){
             printf("\033[0;33m");
