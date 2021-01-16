@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall
 
-CIBLES	= shell ls touch
+CIBLES	= shell ls touch mkdir
 
 all: $(CIBLES)
 
