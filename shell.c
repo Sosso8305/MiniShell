@@ -13,6 +13,7 @@
 
 char * fdest = NULL;
 int append = 0;
+int err_out =0;
 
 void init_msg(){
     puts("\n***********************************************");
@@ -70,12 +71,16 @@ int read_command(char * command, char ** arg){
         scanf("%s",chaine);
         
 
-        if (!strcmp(chaine,">") || !strcmp(chaine,">>")){
+        if (!strcmp(chaine,">") || !strcmp(chaine,">>") || !strcmp(chaine,"2>")){
             fdest = malloc((BUFSIZE -1) * sizeof(char));
             scanf("%s",fdest);
             if(!strcmp(chaine,">>")){
                 append = 1;
             }
+            else if (!strcmp(chaine,"2>")){
+                err_out = 1;
+            }
+
 
             break;
 
@@ -111,7 +116,11 @@ int run_command(char * command, char ** arg){
 
             if(outfd == -1) perror ("open fdest");
 
-            dup2(outfd,STDOUT_FILENO);
+
+            if(err_out)
+                dup2(outfd,STDERR_FILENO);
+            else
+                dup2(outfd,STDOUT_FILENO);
         }
 
         if(!strcmp(command,"cd")) cd(arg);
