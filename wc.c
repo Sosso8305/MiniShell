@@ -13,8 +13,26 @@ void print_warning(char * text){
 }
 
 int szouaoui(int argc,char * argv[]){
+    if(argc != 2){
+        print_warning("command : wc <src> \n");
+        return -1;
+    }   
 
-    print_warning("à implémenter\n");
+    FILE * file;
+    char caract;
+    int nb = 0;
+
+    
+
+    if((file = fopen(argv[1],"r")) == NULL) perror("fopen file");
+
+    while ((caract = getc(file)) != EOF){
+        if (caract=='\n') nb++;
+    }
+    
+    printf("%s contient %i lignes \n",argv[1],nb+1);
+
+    fclose(file);
     return EXIT_SUCCESS;
 }
 
