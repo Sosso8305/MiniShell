@@ -30,6 +30,28 @@ void print_warning(char * text){
     printf("\x1B[0m");
 }
 
+void Shell_getenv(char ** arg){
+    if(arg[1] == NULL) print_warning("command : getenv <env variable> \n");
+
+
+    if(getenv(arg[1]) == NULL)
+			fprintf(stderr,"No such environement variable\n");
+		else
+			printf("%s:%s\n", arg[1], getenv(arg[1]));
+    
+}
+
+void Shell_env(){
+
+    char * arg = "/usr/bin/env";
+    
+    if(getenv("/usr/bin/env") == NULL)
+			fprintf(stderr,"No such environement variable\n");
+		else
+			printf("%s:%s\n", arg, getenv(arg));
+    
+}
+
 
 void pwd(int saut){
     char * tmp;
@@ -38,11 +60,13 @@ void pwd(int saut){
     
     if(saut)
         printf("%s \n",tmp);
-    else{
+
+    else {
         printf("\x1B[36m");
         printf("%s",tmp);
         printf("\x1B[0m");
     }
+
 }
 
 int cd(char ** arg){
@@ -134,6 +158,10 @@ int run_command(char * command, char ** arg){
         if(!strcmp(command,"cd")) cd(arg);
 
         else if (!strcmp(command,"pwd")) pwd(1);
+
+        else if (!strcmp(command,"getenv")) Shell_getenv(arg);
+
+        else if (!strcmp(command,"env")) Shell_env();
 
         else if(execvp(command,arg) == -1) perror("execvp");
 

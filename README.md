@@ -10,9 +10,9 @@ couleur du shell
 utilisation de commande externe : ls touch mkdir mv cp rm rmdir cat head clean ln wc
 utilisation du commande interne : cd pwd 
 
-commande non fonctionnel: quickdiff 
+commande non fonctionnel: quickdiff env getenv
 
-commande à implémenter: grep env getenv export
+commande à implémenter: grep  export
 
 
 probleme avec le exit de temps en temps
