@@ -14,8 +14,7 @@ void print_warning(char * text){
     printf("\x1B[0m");
 }
 
-int main (int argc, char * argv[]){
- 
+int szouaoui(int argc,char * argv[]){
     if(argc != 3){
         print_warning("command : cp <src> <dest> \n");
         return -1;
@@ -35,5 +34,14 @@ int main (int argc, char * argv[]){
 
     close(fddest);
     close(fdsrc);
+
+    return EXIT_SUCCESS;
+
+}
+
+
+int main (int argc, char * argv[]){
+    
+    return szouaoui(argc,argv);
 
 }

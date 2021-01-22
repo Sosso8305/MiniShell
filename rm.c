@@ -14,13 +14,19 @@ void print_warning(char * text){
     printf("\x1B[0m");
 }
 
-int main (int argc, char * argv[]){
- 
-    if(argc != 2){
+int szouaoui(int argc,char *argv[]){
+   if(argc != 2){
         print_warning("command : rm <filename> \n");
         return -1;
     }   
 
     if (remove(argv[1]) == -1) perror("remove src");
 
+    return EXIT_SUCCESS;
+}    
+
+int main (int argc, char * argv[])
+{
+    return szouaoui(argc,argv);
+ 
 }

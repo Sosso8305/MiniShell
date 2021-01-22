@@ -13,8 +13,7 @@ void print_warning(char * text){
     printf("\x1B[0m");
 }
 
-int main (int argc, char * argv[]){
- 
+int szouaoui(int argc,char * argv[]){
     if(argc < 2){
         print_warning("command : cat <filename1> ... <filenameN> \n");
         return -1;
@@ -33,5 +32,16 @@ int main (int argc, char * argv[]){
 
         fclose(file);
     }
+
+    return EXIT_SUCCESS;
+
+
+}
+
+
+
+int main (int argc, char * argv[]){
+ 
+    return szouaoui(argc,argv);    
 }
     

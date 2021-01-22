@@ -95,9 +95,8 @@ void local(const char * name) { //fct pour l'exo 9  je suis conscient que je rep
 		closedir(dirp);    
 }
 
+int szouaoui(int argc,char * argv[]){
 
-int main(int argc, const char *argv[]){
-	
 	struct stat data;
 	DIR *dirp;
 	struct dirent *dp;
@@ -136,7 +135,16 @@ int main(int argc, const char *argv[]){
 		}	
 
 	}
-	exit(EXIT_SUCCESS);
+	return EXIT_SUCCESS;
+}
+
+
+
+
+int main(int argc, char * argv[]){
+	
+	return szouaoui(argc,argv);
+	
 
 }
 
