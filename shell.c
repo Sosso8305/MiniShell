@@ -52,6 +52,16 @@ void Shell_env(){
     
 }
 
+void Shell_export(char ** arg){
+	if (arg[1] == NULL){
+		fprintf(stderr, "usage: putenv <environment_variable=value\n");
+	}
+	
+	if(putenv(arg[1])){
+			fprintf(stderr,"putenv: failed to create/modify variable\n");
+	}
+}
+
 
 void pwd(int saut){
     char * tmp;
@@ -162,6 +172,8 @@ int run_command(char * command, char ** arg){
         else if (!strcmp(command,"getenv")) Shell_getenv(arg);
 
         else if (!strcmp(command,"env")) Shell_env();
+
+        else if (!strcmp(command,"export")) Shell_export(arg);
 
         else if(execvp(command,arg) == -1) perror("execvp");
 

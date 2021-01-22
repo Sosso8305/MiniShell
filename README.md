@@ -1,5 +1,5 @@
 # MiniShell
-TD8 3A INSA
+TD8 3A INSA examen
 https://github.com/Sosso8305/MiniShell
 
 Faire un make run 
@@ -11,8 +11,9 @@ utilisation de commande externe : ls touch mkdir mv cp rm rmdir cat head clean l
 utilisation du commande interne : cd pwd 
 
 commande non fonctionnel: quickdiff env getenv
+pas le temps de test: export
 
-commande à implémenter: grep  export
+commande à implémenter: grep  
 
 
 probleme avec le exit de temps en temps
