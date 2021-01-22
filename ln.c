@@ -14,7 +14,13 @@ void print_warning(char * text){
 
 int szouaoui(int argc,char * argv[]){
 
-    print_warning("à implémenter\n");
+    if(argc != 3){
+        print_warning("command : ln <src> <dest> \n");
+        return -1;
+    }
+
+    if(symlink(argv[1],argv[2]) == -1) perror("symlink");    
+
     return EXIT_SUCCESS;
 }
 
