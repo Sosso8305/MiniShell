@@ -71,14 +71,19 @@ int read_command(char * command, char ** arg){
         scanf("%s",chaine);
         
 
-        if (!strcmp(chaine,">") || !strcmp(chaine,">>") || !strcmp(chaine,"2>")){
+        if (!strcmp(chaine,">") || !strcmp(chaine,">>") || !strcmp(chaine,"2>") || !strcmp(chaine,"2>>")){
             fdest = malloc((BUFSIZE -1) * sizeof(char));
             scanf("%s",fdest);
+
             if(!strcmp(chaine,">>")){
                 append = 1;
             }
             else if (!strcmp(chaine,"2>")){
                 err_out = 1;
+            }
+            else if (!strcmp(chaine,"2>>")){
+                err_out=1;
+                append=1;
             }
 
 
