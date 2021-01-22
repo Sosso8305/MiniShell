@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall
 
-CIBLES	= shell ls touch mkdir mv cp rm rmdir cat
+CIBLES	= shell ls touch mkdir mv cp rm rmdir cat chmod
 
 all: $(CIBLES)
 

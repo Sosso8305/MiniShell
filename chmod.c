@@ -15,23 +15,24 @@ void print_warning(char * text){
 }
 
 int szouaoui(int argc,char *argv[]){
-   if(argc != 2){
-        print_warning("command : rm <filename> \n");
-        return -1;
-    }   
 
-    struct stat data;
+//    if(argc != 3){
+//         print_warning("command : chmod <mode> <filename> \n");
+//         return -1;
+//     }
 
-    if(lstat(argv[1],&data) == -1) perror("lstat");
+//     char * mode = "0";
+//     strcat(mode,argv[1]);
 
+//     int Realmode = strtol(mode, 0, 8);
 
-    if (S_ISREG(data.st_mode)){
-        if (unlink(argv[1]) == -1) perror("unlink src");
-    }
-    else print_warning("arg : it's not a file\n");
-    
+//     if(chmod(argv[1], Realmode) == -1) {
+// 		perror("chmod error");
+// 		return EXIT_FAILURE;
+// 	}
+
+    print_warning("chmod non fonctionnel\n");
     return EXIT_SUCCESS;
-
 }    
 
 int main (int argc, char * argv[])

@@ -16,11 +16,20 @@ void print_warning(char * text){
 
 int szouaoui(int argc,char * argv[]){
     if(argc != 2){
-        print_warning("command : rm <filename> \n");
+        print_warning("command : rmdir <directory name> \n");
         return -1;
     }   
 
-    if (remove(argv[1]) == -1) perror("remove src");
+
+    struct stat data;
+
+    if(lstat(argv[1],&data) == -1) perror("lstat");
+
+
+    if (S_ISDIR(data.st_mode)){
+        if (rmdir(argv[1]) == -1) perror("rmdir src");
+    }
+    else print_warning("arg : it's not directory \n");
     
     return EXIT_SUCCESS;
 
