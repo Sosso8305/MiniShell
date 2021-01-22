@@ -146,7 +146,7 @@ int run_command(char * command, char ** arg){
 
 void shell(){
     printf("\033[0;35m");
-    printf("sosso@shell:");
+    printf("szouaoui@shell:");
     printf("\033[0m");
     pwd(0);
     printf("$ ");
