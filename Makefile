@@ -11,5 +11,5 @@ all: $(CIBLES)
 clean2: 
 	$(RM) -f core *.o $(CIBLES) *~
 
-run: all
+run: clean2 all 
 	./shell
