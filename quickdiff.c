@@ -76,7 +76,7 @@ int szouaoui(int argc,char * argv[]){
 
     close(fd1);
     close(fd2);
-    puts("marche pas encore trés bien")
+    puts("marche pas encore trés bien");
 
     return EXIT_SUCCESS;
 }
