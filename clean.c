@@ -13,8 +13,16 @@ void print_warning(char * text){
 }
 
 int szouaoui(int argc,char * argv[]){
+    if(argc != 2){
+        print_warning("command : clean <filename>  \n");
+        return -1;
+    }   
+    
 
-    print_warning("à implémenter\n");
+    int fd;
+    if ((fd= open(argv[1],O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1) perror("open dest");
+    close(fd);
+
     return EXIT_SUCCESS;
 }
 

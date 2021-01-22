@@ -14,7 +14,30 @@ void print_warning(char * text){
 
 int szouaoui(int argc,char * argv[]){
 
-    print_warning("à implémenter\n");
+    if(argc != 2){
+        print_warning("command : head <src> \n");
+        return -1;
+    }   
+
+    FILE * file;
+    char caract;
+    int nb = 0;
+
+    
+
+    if((file = fopen(argv[1],"r")) == NULL) perror("fopen file");
+
+    while ((caract = getc(file)) != EOF){
+        if (nb >= 10) break;
+        if (caract=='\n') nb++;
+        printf("%c",caract);
+
+    }
+    
+
+    fclose(file);
+    
+
     return EXIT_SUCCESS;
 }
 
