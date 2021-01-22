@@ -10,7 +10,7 @@ couleur du shell
 utilisation de commande externe : ls touch mkdir mv cp rm rmdir cat head clean ln wc
 utilisation du commande interne : cd pwd 
 
-commande non fonctionnel: quickdiff env getenv
+commande non fonctionnel: quickdiff chmod env getenv
 pas le temps de test: export
 
 commande à implémenter: grep  
