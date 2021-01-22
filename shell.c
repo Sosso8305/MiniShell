@@ -14,6 +14,7 @@
 char * fdest = NULL;
 int append = 0;
 int err_out =0;
+int no_wait =0;
 
 void init_msg(){
     puts("\n***********************************************");
@@ -88,7 +89,9 @@ int read_command(char * command, char ** arg){
 
 
             break;
-
+        }
+        else if (!strcmp(chaine,"&")){
+            no_wait=1;
         }
         else arg[nb_arg++]=chaine;
     }
@@ -138,9 +141,11 @@ int run_command(char * command, char ** arg){
 
     }
     else{
-        wait(&pid);
-        if (WIFEXITED(pid)) return EXIT_SUCCESS;
-        return EXIT_FAILURE;
+        if(!no_wait){
+            wait(&pid);
+            if (WIFEXITED(pid)) return EXIT_SUCCESS;
+            return EXIT_FAILURE;
+        }
     }
 
 
